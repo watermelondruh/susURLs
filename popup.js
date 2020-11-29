@@ -1,26 +1,43 @@
 'use strict';
-
 //const { Session } = require("inspector");
+var url = "www.google.com";
 
 function handleClick() {
-    //sessionStorage.setItem("urlsrc", urlsrc.value);
-    
-    const data = {'long_url' : 'twitter.com'};
-    const response = fetch('https://verylegit.link/sketchify', {
-        method: 'POST',
-        headers: { 
-            'Content-Length': 20,
-            'Content-Type': 'application/x-www-form-urlencoded' },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then((resdata) => {
-        alert(resdata, "bruh");
-    })
-    .catch((err) => {
-        //sessionStorage.setItem("url", err);
-        console.log(err);
-    });
+
+    chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
+        function(tabs) {
+           url = tabs[0].url;
+           sessionStorage.setItem("url", url);
+        }
+    );
+
+    const urlsrc = document.getElementById("urlsrc");
+    sessionStorage.setItem("urlsrc", urlsrc.value);
+
+    if (urlsrc && urlsrc.value === "ShadyURL") {
+        console.log(url);
+    }
+    else {
+        if (sessionStorage.getItem("verylegit_clicked"))
+            return false;
+
+        fetch('https://verylegit.link/sketchify', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/x-www-form-urlencoded' },
+            body: "long_url={url}"
+        })
+        .then(response => response.text())
+        .then((resdata) => {
+            sessionStorage.setItem("url", resdata);
+            document.getElementById("link").innerHTML = resdata;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+        sessionStorage.setItem("verylegit_clicked", true);
+    }
+    return false;
 }
 
 window.onload = function () {
@@ -28,10 +45,10 @@ window.onload = function () {
     // display current link
     chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
         function(tabs) {
-            url = tabs[0].url;
-            //sessionStorage.setItem("url", url);
-            document.getElementById("link").innerHTML = url;
+           url = tabs[0].url;
+           sessionStorage.setItem("url", url);
         }
     );
+    document.getElementById("link").innerHTML = sessionStorage.getItem("url");
 };
 
