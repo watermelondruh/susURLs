@@ -9,18 +9,19 @@ body {
 }
 
 h1 {
-  color: #53637D;
-  font: 26px/1.2 Helvetica, sans-serif;
-  font-size: 200%;
+  color: #000000;
+  font-family: 'Amatic SC', cursive;
+  font-size: 50px;
+  letter-spacing: 2px;
   margin: 0;
-  padding-bottom: 4px;
-  text-shadow: white 0 1px 2px;
 }
 
 label {
-  color: #222;
-  font: 18px/1.4 Helvetica, sans-serif;
-  margin: 0.5em 0;
+  color: #000000;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 25px;
+  margin: 0;
+  margin-bottom: 4px;
   display: inline-block;
 }
 
@@ -29,19 +30,35 @@ form {
   width: 563px;
 }
 
+select {
+  border: 2px solid #000000;
+  border-radius: 5px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-left: 15px;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 25px;
+}
+
+
+
 button {
   display: block;
-  border-radius: 2px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   -webkit-user-select: none;
-  background: -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
-  border: 1px solid #AAA;
-  color: #444;
-  margin-bottom: 0;
-  min-width: 4em;
-  padding: 3px 12px;
-  margin-top: 0;
-  font-size: 1.1em;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  background-color: #fff;
+  background-size: 50px 33px;
+  width: 48px;
+  height: 32px;
+  margin-top: 10px;
+  font-family: 'Amatic SC', cursive;
+  font-size: 20px;
+}
+
+button:hover {
+  background: #010101;
+  color: #fff;
 }
 
 .overlay {
